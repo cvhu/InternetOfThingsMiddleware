@@ -1,43 +1,58 @@
-\documentclass[conference]{IEEEtran}
-\usepackage{graphicx}
-\usepackage{cite}
-\usepackage{url}
-\usepackage[cmex10]{amsmath}
-\usepackage{algorithmic}
-\usepackage{array}
-\usepackage{mdwmath}
-\usepackage{mdwtab}
-\usepackage{eqparbox}
-\usepackage[font=footnotesize]{subfig}
-\usepackage{fixltx2e}
-\usepackage{setspace}
-\usepackage[ruled,vlined,commentsnumbered]{algorithm2e}
-\usepackage{amssymb}
-\usepackage{amsthm}
+\documentclass[11pt,onecolumn]{article} 
+\usepackage{latex8}
+\bibliographystyle{latex8}
+\usepackage{times}
 
-\newtheorem{thm}{Theorem}
 
 
 \begin{document}
+%
+% paper title
+% can use linebreaks \\ within to get better formatting as desired
+\title{Middleware Solutions for the Internet of Things}
 
-\title{Middleware Solutions on the Internet of Things}
 
-\author{\IEEEauthorblockN{Chinwei ``Vic'' Hu}
-\IEEEauthorblockA{Department of Electrical and Computer Engineering}
-\IEEEauthorblockA{The University of Texas at Austin}
-\IEEEauthorblockA{vic@cvhu.org}
+% author names and affiliations
+% use a multiple column layout for up to two different
+% affiliations
+
+\author{
+Chinwei ``Vic'' Hu\\
+{\small \textit{Department of Electrical and Computer Engineering} }\\
+{\small \textit{The University of Texas at Austin}}
 }
+
+
+% make the title area
 \maketitle
-\onehalfspace
+
+
 \begin{abstract}
+The abstract is to be in fully-justified italicized text as it is here, below the author information. Use the word ⤽Abstract⤝ as the title, in 12-point Times New Roman, boldface type, centered relative to the column, initially capitalized. The abstract is to be in 11-point, single-spaced type, and may be up to 3 in. (18 picas or 7.62 cm) long. Leave two blank lines after the abstract, then begin the main text. All manuscripts must be in English. All text material for 6-by-9-inch proceedings will be formatted in a single column per page.
 \end{abstract}
 
-\begin{thebibliography}{1}
 
-\bibitem{pubsub}
-Rajkumar, Ragunathan, Michael Gagliardi, and Lui Sha. "The real-time publisher/subscriber inter-process communication model for distributed real-time systems: design and implementation." Real-Time Technology and Applications Symposium, 1995. Proceedings. IEEE, 1995.
+
+\Section{Introduction}
+
+
+%\medskip
+%\noindent
+\Section{References}
+List and number all bibliographical references in 9-point Times New Roman, single-spaced with 10-point interlining spacing, at the end of your paper. When referenced in the text, enclose the citation number in square brackets~\cite{IEEEhowto:kopka}. Where appropriate, include the name(s) of editors of referenced books.
+
+% use section* for acknowledgement
+\section*{Acknowledgment}
+The authors would like to thank...
+more thanks here
+
+\begin{thebibliography}{1}
+\small
+\bibitem{IEEEhowto:kopka}
+H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
+  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
 
 \end{thebibliography}
-\end{document}
 
+\end{document}
 
