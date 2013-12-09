@@ -43,7 +43,7 @@ The main purpose of this paper is to study a collection of middleware solutions 
 \section{System Overview}
 One challenge in IoT is to address and aggregate context-awareness in surrounding neighborhood, such as traffic condition of nearby intersections, skill level and interests of players in a group, or formulating a dynamic mobile network based on communication quality and available resources. Specifically in a dynamic pervasive network, we need to identify the notion of groups based on context predicates, and to define entity and group context to assess and share them in their surrounding computing environments.  Motivated by this fundamental problem, Grapevine \cite{grapevine} addresses exactly this problem by introducing a mechanism to efficiently define and share context and group memberships in a network.
 
-\subsection{Grapevine Architecture and Implementation}
+\subsection{Grapevine}
 
 To define context summary, Grapevine uses the Bloomier filter data structure \cite{chazelle2004bloomier}, which consists of a Bloom filter cascade with $O(rn)$ space complexity and false positive rate $\epsilon \propto 2^{-r}$, where $n$ is the number of elements and $r$ is the number o bits. On the other hand, a notion of groups is defined by a constraint function $f_G$ of four types: {\em Labeled, Asymmetric, Symmetric}, and {\em Context-Defined}, which is combined with the context summary of entities to formulate expressive group membership relations.
 
@@ -70,10 +70,37 @@ As shown in Fig.~\ref{grapevine_architecture}, the {\em Context Handler} compute
 In implementation, Grapevine uses Java to gain transparency in deployment platform and fine-grained control over the network layer. The information flow of Grapevine, as shown in Fig.~\ref{grapevine_flow}, illustrates how the {\em Context Handler} interacts with the application to compute group membership and context, to store a map of entity context, and to create Bloomier filters for the {\em Context Shim} to access the context summary. The performance and effectiveness of Grapevine are evaluated through a simulated network of 10-by-10 grid and the Pharos multi-robot testbed\cite{agmon2008multi}.
 
 
-\subsection{Gander Architecture and Implementation}
+\subsection{Gander}
 In contrast to the traditional indexing and ranking methods that require a global view of context connectivity and chronicle archives such as PageRank\cite{page1999pagerank}, the Gander search engine \cite{michel2013gander} provides an IoT perspective to the spatiotemporal queries in the {\em Personalized Networked Spaces} (PNetS). Challenges of searching in the here and now include the privacy and security of personal data, rapidly changing context and conditions, and the impracticality of centrally indexing a constantly growing amount of data. Moreover, by limiting a search within constrained neighborhood and spatiotemporal context, more efficient network and computing resources could be attained.
 
+In order to match the {\em query resolution}, {\em query constraints} and {\em reachability} need to be defined to measure the {\em relevance metric}. Furthermore, a {\em tuple space} is used to provide the {\em global virtual data structure} \cite{picco2002global} distributed in a dynamic network. Since it's impractical to obtain global view in PNetS, query protocols have to be operated within the surrounding data. To find the most relevant query results within a constrained neighborhood of nodes, Gander {\em samples} result candidates in five styles, which are illustrated in Fig.~\ref{gander_sampling}.
 
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[width=1.0\textwidth]{resources/gander_sampling.png}
+  \end{center}
+  \vspace{-20pt}
+  \caption{Query sampling styles\cite{michel2013gander}. Dashed lines represent sent messages, and darkened nodes are those who respond to a given query. (a) Flooding (b) Random (c) Probabilistic (d) Directional (e) Regional  \label{gander_sampling}}
+    \vspace{-10pt}
+\end{figure}
+
+Each of the five sampling styles demonstrates the tradeoff between quality and cost in network overhead and latency. {\em Flooding} attempts to reach every node within the network hops, {\em Random} parameterizes the likelihood of responses, {\em Probabilistic} forwards received messages based on a locality probabilistic distribution, {\em Directional} constraints the sampling within a certain heading and angle, and {\em Regional} aims at a given target area. Moreover, a secondary contextual queries are carried out from potential result's perspective, which collects local conditions without adding network overhead and delays.
+
+\begin{wrapfigure}{r}{0.4\textwidth}
+\vspace{-20pt}
+  \begin{center}
+    \includegraphics[width=0.4\textwidth]{resources/gander_architecture.png}
+  \end{center}
+  \vspace{-20pt}
+  \caption{{\em myGander} Architecture \cite{michel2013gander} \label{gander_architecture}}
+    \vspace{-20pt}
+\end{wrapfigure}
+
+The implementation of Gander, {\em myGander}\cite{michel2012mygander}, follows the model-view-controller architecture pattern as shown in Fig.~\ref{gander_architecture}. The model consists of a tuple space implementing the data structure, a routing table that maintains the connectivity in the network, a query processor that handles incoming queries to the tuple space, performs secondary contextual queries on the collected data and meta-data, and routes the results according to its sampling style.
+
+To evaluate sampling protocols in a real world large scale network is extremely challenging. In practice, benchmark simulation for {\em myGander} can be done with OMNet++\cite{varga2001omnet++} for networking and SUMO\cite{krajzewicz2002sumo} for node mobility, in which each node uses its own global virtual data structure to process queries and connects to other mobile node through a proxy.
+
+\subsection{DAIS}
 
 \section{Architecture Design \& Patterns}
 
@@ -82,7 +109,7 @@ With the rise of sensor-enhanced objects and computationally-powerful mobile dev
 
 Gander \cite{michel2012mygander}
 
-\subsection{DAIS}
+
 	
 \section{Current State, Drawbacks, and Future Improvements}
 
