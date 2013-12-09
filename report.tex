@@ -64,7 +64,7 @@ As shown in Fig.~\ref{grapevine_architecture}, the {\em Context Handler} compute
   \end{center}
   \vspace{-20pt}
   \caption{Information Flow in the Context Shim and Context Handler of Grapevine \cite{grapevine} \label{grapevine_flow}}
-    \vspace{-20pt}
+    \vspace{-30pt}
 \end{wrapfigure}
 
 In implementation, Grapevine uses Java to gain transparency in deployment platform and fine-grained control over the network layer. The information flow of Grapevine, as shown in Fig.~\ref{grapevine_flow}, illustrates how the {\em Context Handler} interacts with the application to compute group membership and context, to store a map of entity context, and to create Bloomier filters for the {\em Context Shim} to access the context summary. The performance and effectiveness of Grapevine are evaluated through a simulated network of 10-by-10 grid and the Pharos multi-robot testbed\cite{agmon2008multi}.
@@ -81,7 +81,7 @@ In order to match the {\em query resolution}, {\em query constraints} and {\em r
   \end{center}
   \vspace{-20pt}
   \caption{Query sampling styles\cite{michel2013gander}. Dashed lines represent sent messages, and darkened nodes are those who respond to a given query. (a) Flooding (b) Random (c) Probabilistic (d) Directional (e) Regional  \label{gander_sampling}}
-    \vspace{-10pt}
+    \vspace{-15pt}
 \end{figure}
 
 Each of the five sampling styles demonstrates the tradeoff between quality and cost in network overhead and latency. {\em Flooding} attempts to reach every node within the network hops, {\em Random} parameterizes the likelihood of responses, {\em Probabilistic} forwards received messages based on a locality probabilistic distribution, {\em Directional} constraints the sampling within a certain heading and angle, and {\em Regional} aims at a given target area. Moreover, a secondary contextual queries are carried out from potential result's perspective, which collects local conditions without adding network overhead and delays.
@@ -91,7 +91,7 @@ Each of the five sampling styles demonstrates the tradeoff between quality and c
   \begin{center}
     \includegraphics[width=0.4\textwidth]{resources/gander_architecture.png}
   \end{center}
-  \vspace{-20pt}
+  \vspace{-10pt}
   \caption{{\em myGander} Architecture \cite{michel2013gander} \label{gander_architecture}}
     \vspace{-20pt}
 \end{wrapfigure}
@@ -101,19 +101,39 @@ The implementation of Gander, {\em myGander}\cite{michel2012mygander}, follows t
 To evaluate sampling protocols in a real world large scale network is extremely challenging. In practice, benchmark simulation for {\em myGander} can be done with OMNet++\cite{varga2001omnet++} for networking and SUMO\cite{krajzewicz2002sumo} for node mobility, in which each node uses its own global virtual data structure to process queries and connects to other mobile node through a proxy.
 
 \subsection{DAIS}
+In most cases, sensor nodes such as mobile phones and embedded processors have fairly limited power and computational resources, which adds complexity and barrier to the programmers. To fully facilitate application developments in the sensor network of the IoT, low-level specifications of sensor selection and communication need to be abstracted from the programmers for them to focus on high-level designs of sophisticated pervasive applications, which is the goal of DAIS (Declarative Applications in Immersive Sensor networks) \cite{dais}.
 
-\section{Architecture Design \& Patterns}
+\begin{wrapfigure}{r}{0.6\textwidth}
+\vspace{-30pt}
+  \begin{center}
+    \includegraphics[width=0.6\textwidth]{resources/dais_architecture.png}
+  \end{center}
+  \vspace{-20pt}
+  \caption{DAIS Architecture \cite{dais} \label{dais_architecture}}
+    \vspace{-10pt}
+\end{wrapfigure}
 
-\subsection{Gander: The Search of Here and Now}
-With the rise of sensor-enhanced objects and computationally-powerful mobile devices, the need for a dynamic search engine that is adaptive to the surrounding spaces and query context is inevitable. 
+In Fig.~\ref{dais_architecture}, the {\em behavioral programming} abstraction in the handheld component (user accessible clients such as mobile devices) allows application developers to define interaction environments and data requests specification. The {\em virtual sensor} abstraction, on the other hand, employs mechanisms for aggregating heterogeneous data from a variety of physical sensors. 
 
-Gander \cite{michel2012mygander}
+By providing abstractions to meet resource constraints in immersive sensor networks, DAIS aims to tackle challenges including locality of interactions, mobility induced dynamics, unpredictability of coordination, and complexity of programming\cite{dais}. In particular, a running application needs to efficiently target its interactions only with necessary peers. 
 
+A {\em scene}, a set of declarative specifications for local interactions. encapsulates the node exposure according to property constraints such as hosts, links, and data, providing programmers an abstraction from implicit implementation details. To parameterize a scene, programmers can use {\em metric} to define networking costs, {\em aggregator} to calculate network link, and {\em threshold} to filter the qualified members.
 
+\begin{wrapfigure}{r}{0.6\textwidth}
+\vspace{-20pt}
+  \begin{center}
+    \includegraphics[width=0.6\textwidth]{resources/dais_objects.png}
+  \end{center}
+  \vspace{-20pt}
+  \caption{DAIS Object Diagram\cite{dais} \label{dais_objects}}
+    \vspace{-10pt}
+\end{wrapfigure}
+
+In Fig.~\ref{dais_objects}, a simplified object flow diagram illustrates how the strategy pattern\cite{gamma1993design} is used to determine how a {\em Query} can be disseminated to a {\em Scene} according to a {\em SceneStrategy} algorithm. In \cite{dais}, only one simple strategy called the {\em BasicScene} was implemented to prototype the proposed middleware. 
+
+With the introduction of the {\em scene}, DAIS encapsulates a localized and adaptive perspective to applications in pervasive computing networks that have highly dynamic mobility and connectivity. It provides programmers with a high-level abstraction interface to build complicated software without worrying about details of sensor context and their interactions.
 	
-\section{Current State, Drawbacks, and Future Improvements}
-
-Dynamic network hop $\tau$ in Grapevine.
+\section{Discussions on Drawbacks and Future Improvements}
 
 \Section{Conclusion}
 
