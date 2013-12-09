@@ -30,7 +30,7 @@ Chinwei ``Vic'' Hu\\
 
 
 \begin{abstract}
-In this paper, we briefly talk about what the Internet of Things (IoT) is, why do we care, and a few selection of the state-of-the-art middleware solutions to address some of the common problems IoT faces, such as heterogeneous coordination, context-awareness communication, resource-constrained and efficient computation. In particular, we look at Grapevine \cite{grapevine} and Gander \cite{michel2013gander} developed at The University of Texas at Austin.
+In this paper, we briefly talk about what the Internet of Things (IoT) is, why do we care, and a few selection of the state-of-the-art middleware solutions to address some of the common problems IoT faces, such as heterogeneous coordination, context-awareness communication, resource-constrained and efficient computation. In particular, we look at Grapevine\cite{grapevine}, Gander \cite{michel2013gander}, and DAIS\cite{dais}, all developed at The University of Texas at Austin.
 \end{abstract}
 
 \Section{Introduction}
@@ -38,7 +38,7 @@ Big Data \cite{manyika2011big} and deep analytics are becoming prevalent in almo
 
 The Internet of Things can be used to monitor the behavior and conditions of persons or machines, enhance real-time situational awareness of physical environment, assist better decision making based on data analytics and visualization, automatically and optimally control self-contained complex systems, and efficiently distribute resources in a grid network \cite{chui2010internet}. Nodes interacting in such grid network could be mobile phones, tablets, sensors, actuators, or essentially anything with some kind of communication beacon such as QR code or RFID tags \cite{welbourne2009building}(Radio-Frequency Identification). Due to its pervasive presence and limitless potentials, the US National Intelligence Council includes IoT in a list of ``Disruptive Civil Technologies'' with potential impacts on US national power \cite{officialdisruptive}.
 
-The main purpose of this paper is to study a collection of middleware solutions in addressing the aforementioned challenges in the IoT, including Grapevine \cite{grapevine}, Gander \cite{michel2013gander}, and DAIS \cite{dais}, all done at The Department of Electrical and Computer Engineering at The University of Texas at Austin. In particular, we will look at motivations and intuitions, design patterns, system architectures, and how they can be improved to be practically integrated into our works and life.
+The main purpose of this paper is to study a collection of middleware solutions in addressing the aforementioned challenges in the IoT, including Grapevine \cite{grapevine}, Gander \cite{michel2013gander}, and DAIS \cite{dais}, all done at The Department of Electrical and Computer Engineering at The University of Texas at Austin. In particular, we will look at their motivations and intuitions, design patterns, system architectures, implementations, and what other improvements can be made in the trending IoT middleware solutions.
 
 \section{System Overview}
 One challenge in IoT is to address and aggregate context-awareness in surrounding neighborhood, such as traffic condition of nearby intersections, skill level and interests of players in a group, or formulating a dynamic mobile network based on communication quality and available resources. Specifically in a dynamic pervasive network, we need to identify the notion of groups based on context predicates, and to define entity and group context to assess and share them in their surrounding computing environments.  Motivated by this fundamental problem, Grapevine \cite{grapevine} addresses exactly this problem by introducing a mechanism to efficiently define and share context and group memberships in a network.
@@ -133,9 +133,16 @@ In Fig.~\ref{dais_objects}, a simplified object flow diagram illustrates how the
 
 With the introduction of the {\em scene}, DAIS encapsulates a localized and adaptive perspective to applications in pervasive computing networks that have highly dynamic mobility and connectivity. It provides programmers with a high-level abstraction interface to build complicated software without worrying about details of sensor context and their interactions.
 	
-\section{Discussions on Drawbacks and Future Improvements}
+\section{Future Improvements}
+With the growing popularity of IoT applications, a significant amount of sensitive data will be pervasive within its PNetS in the form of cached or archived data. Therefore, the balance between encryption and computation overhead should be easily configurable in the design of middleware solutions. Namely, a user should be able to specify how secure her data should be encrypted within the networks, opposed to how much performance sacrifice can be tolerated. 
+
+Given the nature of highly dynamic context and connectivity, data structure employed by IoT middleware needs to have adaptive garbage collectors and distributed caching as well. For example, an archive of historical information may be needed to make prediction model for localized planning and recommendation. In such system, it could be challenging to determine how long for a node to persist its data, if snapshots need to be stored in a regional server, and how a cached data could be routed to exploit the largest throughput.
+
+Finally, considering a sensor networks as a transmission system for signal pulses; it would be interesting to develop a self-adaptive networking protocol that can relocate communication and computing resources according to the query demands in real-time, just like the human neural networks. For example, if certain types of queries are in demand in a scene, busy nodes should be able to make surrounding idle nodes as their replicas to balance the incoming loads, while the system keeps a memory of such demand patterns to reconstruct itself accordingly.
 
 \Section{Conclusion}
+
+To summarize, in this paper we discussed about some of the trending issues in the Internet of Things, three sample middleware solutions addressing different challenges, and in what directions IoT may be facing in the near future. More specifically, we talked about how Grapevine efficiently defines sharing context and group memberships, how Gander employs an unconventional search indexing by sampling query results in PNets, and how DAIS provides a convenient abstraction for sensor linkages and interactions. Finally, we brought up three potential directions for future trends in IoT, including configurable security-performance tradeoffs, distributed caching, and an adaptive on-demand networking system.
 
 \section*{Acknowledgment}
 This paper wouldn't be possible without the advices and feedback provided by Dr. Christine Julien and The Department of Electrical and Computer Engineering at The University of Texas at Austin.
